@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUOB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    
+    body {
+      background: #ffffff;
+      color: #192b6c;
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: #192b6c;
+    }
+    
+    h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(145deg, #192b6c, #5d6fc1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(145deg, #192b6c, #5d6fc1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #192b6c;
+    }
+    
+    h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #192b6c;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+      font-weight: 400;
+      color: #333;
+    }
+    
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+    
+    a {
+      color: #192b6c;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    a:hover {
+      color: #5d6fc1;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    /* Navigation */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.2rem 0;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(25, 43, 108, 0.1);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-link {
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      padding: 0.5rem 0;
+      color: #192b6c;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #192b6c;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .nav-link.active {
+      font-weight: 600;
+    }
+    
+    .nav-link.active::after {
+      width: 100%;
+    }
+    
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white;
+      background: linear-gradient(to right, #192b6c, #5d6fc1);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      letter-spacing: -0.01em;
+      box-shadow: 0 4px 20px rgba(25, 43, 108, 0.3);
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(25, 43, 108, 0.4), transparent 70%),
+                  radial-gradient(circle at bottom left, rgba(93, 111, 193, 0.3), transparent 70%);
+      z-index: -1;
+    }
+    
+    /* Hero Modern Background Animation */
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -2;
+      background: #f8faff;
+    }
+    
+    .gradient-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(125deg, rgba(25, 43, 108, 0.05) 0%, rgba(255, 255, 255, 0.5) 40%, rgba(93, 111, 193, 0.08) 80%);
+    }
+    
+    .noise-texture {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    
+    .grid-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 50px 50px;
+      background-image: 
+        linear-gradient(to right, rgba(25, 43, 108, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(25, 43, 108, 0.03) 1px, transparent 1px);
+      opacity: 0.8;
+    }
+    
+    .animated-blur {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      will-change: transform;
+    }
+    
+    .blur-1 {
+      width: 45vw;
+      height: 45vw;
+      top: -10%;
+      left: -10%;
+      background: radial-gradient(circle at center, rgba(93, 111, 193, 0.15), transparent 70%);
+      animation: float-slow 25s infinite alternate ease-in-out;
+    }
+    
+    .blur-2 {
+      width: 30vw;
+      height: 30vw;
+      bottom: 10%;
+      right: 5%;
+      background: radial-gradient(circle at center, rgba(25, 43, 108, 0.1), transparent 70%);
+      animation: float-slow 18s infinite alternate-reverse ease-in-out;
+    }
+    
+    .blur-3 {
+      width: 25vw;
+      height: 25vw;
+      top: 40%;
+      right: 15%;
+      background: radial-gradient(circle at center, rgba(93, 111, 193, 0.08), transparent 70%);
+      animation: float-slow 15s infinite alternate ease-in-out;
+      animation-delay: 5s;
+    }
+    
+    @keyframes float-slow {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(-2%, -2%) scale(1.05);
+      }
+      100% {
+        transform: translate(2%, 2%) scale(0.95);
+      }
+    }
+    
+    .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(25, 43, 108, 0.2);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+    
+    @keyframes particle-animation {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(1);
+      }
+      10% {
+        opacity: 0.2;
+      }
+      90% {
+        opacity: 0.1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-20vh) scale(0.5);
+      }
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: #a9b4fc;
+      font-weight: 500;
+    }
+    
+    /* Glass Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(25, 43, 108, 0.1);
+      border-radius: 20px;
+      padding: 3rem;
+      margin: 2rem 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(25, 43, 108, 0.05);
+    }
+    
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: 0.5s;
+      pointer-events: none;
+    }
+    
+    .glass-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(25, 43, 108, 0.1);
+    }
+    
+    .glass-card:hover::before {
+      left: 100%;
+    }
+    
+    /* Pricing Cards */
+    .pricing-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .pricing-card {
+      background: white;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(25, 43, 108, 0.1);
+      border-radius: 20px;
+      padding: 2.5rem;
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(25, 43, 108, 0.05);
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(25, 43, 108, 0.1);
+      border: 1px solid rgba(25, 43, 108, 0.2);
+    }
+    
+    .pricing-card:before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #192b6c, #5d6fc1);
+      transition: all 0.3s ease;
+    }
+    
+    .pricing-card:hover:before {
+      height: 8px;
+    }
+    
+    .pricing-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(45deg, #192b6c, #5d6fc1);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(25, 43, 108, 0.2);
+      transform: rotate(5deg);
+    }
+    
+    .pricing-card h3 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      background: linear-gradient(45deg, #192b6c, #5d6fc1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .pricing-card h3:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #192b6c, #5d6fc1);
+    }
+    
+    .pricing-card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .pricing-card ul {
+      flex: 1;
+      list-style-type: none;
+      margin-left: 0;
+      margin-bottom: 2rem;
+    }
+    
+    .pricing-card ul li {
+      position: relative;
+      padding-left: 1.8rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      color: #333;
+    }
+    
+    .pricing-card ul li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #5d6fc1;
+      font-weight: bold;
+    }
+    
+    .pricing-price {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 1.5rem 0;
+      background: linear-gradient(45deg, #192b6c, #5d6fc1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .pricing-period {
+      display: block;
+      text-align: center;
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-top: -0.5rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+    
+    .pricing-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: auto;
+    }
+    
+    .pricing-tooltip {
+      position: absolute;
+      background: rgba(25, 43, 108, 0.9);
+      color: white;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      max-width: 250px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 100;
+    }
+    
+    .pricing-tooltip.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .info-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(25, 43, 108, 0.1);
+      color: #192b6c;
+      font-size: 0.8rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .info-btn:hover {
+      background: #5d6fc1;
+      color: white;
+    }
+    
+    /* Button Styles */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #192b6c, #5d6fc1);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(25, 43, 108, 0.15);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: width 0.5s ease;
+      z-index: -1;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(25, 43, 108, 0.25);
+      color: white;
+    }
+    
+    .btn:hover:before {
+      width: 200%;
+      left: -50%;
+    }
+    
+    .btn-center {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #192b6c;
+      color: #192b6c;
+      box-shadow: none;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(25, 43, 108, 0.05);
+      box-shadow: 0 8px 30px rgba(25, 43, 108, 0.15);
+    }
+    
+    .btn-small {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+    }
+    
+    .btn-with-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    /* Sections */
+    .section {
+      padding: 8rem 0;
+      position: relative;
+    }
+    
+    .section-heading {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    /* How It Works */
+    .how-it-works-section {
+      position: relative;
+      padding: 8rem 0;
+      overflow: hidden;
+      background: #f8faff;
+    }
+    
+    .curved-line {
+      position: absolute;
+      top: 30%;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: none;
+      z-index: 0;
+    }
+    
+    .curved-line:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #192b6c, #5d6fc1, #192b6c);
+      clip-path: path('M0,1 C300,50 700,-40 1600,1');
+    }
+    
+    .how-it-works {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin: 5rem 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .step-card {
+      background: white;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(25, 43, 108, 0.08);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      height: 100%;
+      box-shadow: 0 10px 30px rgba(25, 43, 108, 0.05);
+    }
+    
+    .step-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(25, 43, 108, 0.1);
+      border-color: rgba(25, 43, 108, 0.15);
+    }
+    
+    .step-card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 0;
+      background: linear-gradient(135deg, #192b6c, #5d6fc1);
+      transition: height 0.4s ease;
+      z-index: -1;
+      border-radius: 20px 20px 0 0;
+    }
+    
+    .step-card:hover:before {
+      height: 8px;
+    }
+    
+    .step-card:after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      right: -50px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(93, 111, 193, 0.1), transparent 70%);
+      transition: all 0.4s ease;
+    }
+    
+    .step-card:hover:after {
+      transform: scale(1.5);
+    }
+    
+    .step-number {
+      background: linear-gradient(45deg, #192b6c, #5d6fc1);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 auto 2rem;
+      box-shadow: 0 10px 20px rgba(25, 43, 108, 0.15);
+      position: relative;
+      transition: all 0.3s ease;
+      color: white;
+    }
+    
+    .step-card:hover .step-number {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 15px 30px rgba(25, 43, 108, 0.25);
+    }
+    
+    .step-icon {
+      position: absolute;
+      font-size: 2rem;
+      color: rgba(25, 43, 108, 0.1);
+      top: 10px;
+      right: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .step-card:hover .step-icon {
+      transform: scale(1.2) rotate(10deg);
+      color: rgba(25, 43, 108, 0.2);
+    }
+    
+    .step-card h4 {
+      margin: 0 0 1.5rem;
+      font-size: 1.4rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    
+    .step-card h4:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, #192b6c, #5d6fc1);
+    }
+    
+    .step-card p {
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+      color: #444;
+    }
+    
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 1/1;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover {
+      transform: scale(1.03);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    /* Call to Action */
+    .cta-section {
+      text-align: center;
+      padding: 6rem 0;
+    }
+    
+    .cta-section h2 {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-section p {
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2rem;
+    }
+    
+    /* Footer */
+    .footer {
+      background: rgba(4, 4, 9, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4rem 0 2rem;
+    }
+    
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+    }
+    
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #5865F2, #8c9eff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .footer-links h4 {
+      margin-bottom: 1.2rem;
+      color: #7583fb;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #fff;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: #5865F2;
+      transform: translateY(-3px);
+    }
+    
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      max-width: 350px;
+    }
+    
+    .newsletter-form input {
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      margin-bottom: 1rem;
+      color: white;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    
+    .newsletter-form input:focus {
+      border-color: #5865F2;
+      box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.3);
+    }
+    
+    .copyright {
+      text-align: center;
+      margin-top: 4rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animated {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    .delay-1 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-2 {
+      animation-delay: 0.4s;
+    }
+    
+    .delay-3 {
+      animation-delay: 0.6s;
+    }
+    
+    /* Glow Effects */
+    .glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+    }
+    
+    .glow-1 {
+      top: 10%;
+      left: 20%;
+      width: 300px;
+      height: 300px;
+      background: rgba(25, 43, 108, 0.05);
+      animation: pulse 8s infinite alternate;
+    }
+    
+    .glow-2 {
+      bottom: 10%;
+      right: 15%;
+      width: 400px;
+      height: 400px;
+      background: rgba(93, 111, 193, 0.06);
+      animation: pulse 12s infinite alternate-reverse;
+    }
+    
+    .glow-3 {
+      top: 40%;
+      right: 30%;
+      width: 250px;
+      height: 250px;
+      background: rgba(25, 43, 108, 0.04);
+      animation: pulse 10s infinite alternate;
+    }
+    
+    @keyframes pulse {
+      0% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0.8;
+        transform: scale(1.2);
+      }
+    }
+    
+    /* Quirky Elements */
+    .quirky-element {
+      position: absolute;
+      opacity: 0.2;
+      z-index: 0;
+    }
+    
+    .quirky-element-1 {
+      top: 5%;
+      left: 5%;
+      width: 50px;
+      height: 50px;
+      background: rgba(25, 43, 108, 0.2);
+      transform: rotate(15deg);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      animation: spin 20s linear infinite;
+    }
+    
+    .quirky-element-2 {
+      top: 80%;
+      right: 10%;
+      width: 40px;
+      height: 40px;
+      background: rgba(25, 43, 108, 0.2);
+      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+      animation: spin 25s linear infinite reverse;
+    }
+    
+    .quirky-element-3 {
+      top: 40%;
+      left: 8%;
+      width: 60px;
+      height: 60px;
+      border: 2px solid rgba(25, 43, 108, 0.1);
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      animation: morphShape 12s infinite alternate;
+    }
+    
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    @keyframes morphShape {
+      0% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+      25% {
+        border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+      }
+      50% {
+        border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+      }
+      75% {
+        border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+      }
+      100% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .glass-card {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="#" class="logo">MUOB</a>
+      <nav class="nav-menu">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#pricing" class="nav-link">Packages</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#gallery" class="nav-link">Examples</a>
+        <a href="#cta" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content animated">
+        <h1>Done-for-You Social Media Content for Hotels & BnB's</h1>
+        <p class="hero-subtitle delay-1">You send the footage. We turn it into daily scroll-stopping videos.</p>
+        <a href="https://calendly.com/contact-muobsocial/30min" class="btn btn-with-icon delay-2">
+          <span>Book A Call</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-background">
+      <div class="gradient-bg"></div>
+      <div class="grid-lines"></div>
+      <div class="noise-texture"></div>
+      <div class="animated-blur blur-1"></div>
+      <div class="animated-blur blur-2"></div>
+      <div class="animated-blur blur-3"></div>
+      <div class="particles-container" id="particles-container"></div>
+    </div>
+    <div class="quirky-element quirky-element-1"></div>
+    <div class="quirky-element quirky-element-2"></div>
+    <div class="quirky-element quirky-element-3"></div>
+    <div class="glow glow-1"></div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="section" id="problem">
+    <div class="container">
+      <div class="glass-card animated">
+        <h2>Most Hotels and BnB's Are Missing Out on Attention They Deserve</h2>
+        <p>You've got the charm, the vibe, and the aesthetic — but not the content to match. While bigger chains pour money into creative teams, you're left posting the odd brunch shot or sunset.</p>
+        <p>The truth? Great content doesn't have to be hard.</p>
+        <a href="https://calendly.com/contact-muobsocial/30min" class="btn btn-center">Book A Call</a>
+      </div>
+    </div>
+    <div class="glow glow-3"></div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="section" id="solution">
+    <div class="container">
+      <div class="glass-card animated">
+        <h2>That's Where We Come In</h2>
+        <p>We run a hands-off content creation system for boutique hotels.</p>
+        <p><strong>Here's how it works:</strong></p>
+        <ol>
+          <li>We send you a simple filming guide — you film once (on your phone is fine).</li>
+          <li>We turn that footage into a month's worth of trending video content.</li>
+          <li>We post it for you, daily, across the platforms your guests are actually on.</li>
+        </ol>
+        <p>No editing. No caption writing. No stress. Just beautifully branded, trend-driven content — done for you.</p>
+        <a href="https://calendly.com/contact-muobsocial/30min" class="btn btn-center">Book A Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-heading animated">
+        <h2>Our Content Packages</h2>
+        <p>Whether you're posting daily or just a few times a week, we believe every piece of content should reflect the same level of creativity, care, and attention.</p>
+        <p>We don't believe in limiting quality based on your budget. The difference between each package? <strong>Just how many videos you want per month.</strong></p>
+        <blockquote>All videos are created for TikTok, but can be repurposed on <strong>Instagram Reels, Facebook Reels, and YouTube Shorts</strong> — at no extra cost.</blockquote>
+      </div>
+      
+      <div class="pricing-container">
+        <div class="pricing-card animated delay-1">
+          <h3>Lite</h3>
+          <div class="pricing-card-content">
+            <div class="pricing-price">£650<span class="pricing-period">per month</span></div>
+            <ul>
+              <li>12 videos/mo <span class="info-btn" data-tooltip="Twelve professionally created videos each month">i</span></li>
+              <li>TikTok + IG/FB/YouTube</li>
+              <li>Monthly summary</li>
+              <li>Onboarding/Review Calls</li>
+              <li>Research</li>
+              <li>Scripting</li>
+              <li>​​Editing</li>
+              <li>Uploading</li>
+              <li>Optimising Your Social Profiles Course</li>
+              <li>How to Film Content for Your Hotel Guide</li>
+            </ul>
+          </div>
+          <div class="pricing-buttons">
+            <a href="https://calendly.com/contact-muobsocial/30min" class="btn">Get Started</a>
+            <a href="#" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+        
+        <div class="pricing-card animated delay-2">
+          <div class="pricing-badge">Most Popular</div>
+          <h3>Standard</h3>
+          <div class="pricing-card-content">
+            <div class="pricing-price">£950<span class="pricing-period">per month</span></div>
+            <ul>
+              <li>20 videos/mo <span class="info-btn" data-tooltip="Twenty professionally created videos each month">i</span></li>
+              <li>TikTok + IG/FB/YouTube</li>
+              <li>Monthly Report + Trend Analysis <span class="info-btn" data-tooltip="Detailed performance reports and analysis of current trends">i</span></li>
+              <li>Onboarding/Review Calls</li>
+              <li>Research</li>
+              <li>Scripting</li>
+              <li>​​Editing</li>
+              <li>Uploading</li>
+              <li>Optimising Your Social Profiles Course</li>
+              <li>How to Film Content for Your Hotel Guide</li>
+            </ul>
+          </div>
+          <div class="pricing-buttons">
+            <a href="https://calendly.com/contact-muobsocial/30min" class="btn">Get Started</a>
+            <a href="#" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+        
+        <div class="pricing-card animated delay-3">
+          <h3>Full-Time</h3>
+          <div class="pricing-card-content">
+            <div class="pricing-price">£1,450<span class="pricing-period">per month</span></div>
+            <ul>
+              <li>30 videos/mo <span class="info-btn" data-tooltip="Thirty professionally created videos each month - perfect for daily posting">i</span></li>
+              <li>TikTok + IG/FB/YouTube</li>
+              <li>Monthly Report + Trend Analysis <span class="info-btn" data-tooltip="Detailed performance reports and analysis of current trends">i</span></li>
+              <li>Onboarding/Review Calls</li>
+              <li>Research</li>
+              <li>Scripting</li>
+              <li>​​Editing</li>
+              <li>Uploading</li>
+              <li>Optimising Your Social Profiles Course</li>
+              <li>How to Film Content for Your Hotel Guide</li>
+            </ul>
+          </div>
+          <div class="pricing-buttons">
+            <a href="https://calendly.com/contact-muobsocial/30min" class="btn">Get Started</a>
+            <a href="#" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="pricing-tooltip" id="tooltip"></div>
+    </div>
+    <div class="quirky-element quirky-element-2" style="top: 85%; left: 85%;"></div>
+    <div class="quirky-element quirky-element-3" style="top: 10%; right: 8%;"></div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works-section section" id="how-it-works">
+    <div class="container">
+      <div class="section-heading animated">
+        <h2>HOW IT WORKS</h2>
+      </div>
+      
+      <div class="curved-line"></div>
+      
+      <div class="how-it-works">
+        <div class="step-card animated delay-1">
+          <div class="step-number">1</div>
+          <div class="step-icon">🎯</div>
+          <h4>STRATEGY</h4>
+          <p>We start with a strategy call to learn about you, your business, and your goals. This personalized approach ensures content that truly represents your brand.</p>
+          <a href="#" class="btn btn-small">Learn More</a>
+        </div>
+        
+        <div class="step-card animated delay-2">
+          <div class="step-number">2</div>
+          <div class="step-icon">✍️</div>
+          <h4>CREATE</h4>
+          <p>Our expert team researches your niche and writes high-converting short-form video scripts designed to engage your ideal audience and showcase your property.</p>
+          <a href="#" class="btn btn-small">Learn More</a>
+        </div>
+        
+        <div class="step-card animated delay-2">
+          <div class="step-number">3</div>
+          <div class="step-icon">🎥</div>
+          <h4>FILM</h4>
+          <p>Once a month, you film all the content in <strong>one session</strong> – following our easy-to-use script guidance. Just a few hours of filming provides a month of content.</p>
+          <a href="#" class="btn btn-small">Learn More</a>
+        </div>
+        
+        <div class="step-card animated delay-3">
+          <div class="step-number">4</div>
+          <div class="step-icon">🚀</div>
+          <h4>SHARE</h4>
+          <p>We handle all the <strong>editing, optimisation, and scheduling</strong> so your content is posted consistently, keeping your social media active and engaging.</p>
+          <a href="#" class="btn btn-small">Learn More</a>
+        </div>
+      </div>
+      
+      <a href="https://calendly.com/contact-muobsocial/30min" class="btn btn-center">Book A Call</a>
+    </div>
+    <div class="glow glow-3" style="left: 10%; top: 50%;"></div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section" id="gallery">
+    <div class="container">
+      <div class="section-heading animated">
+        <h3>Hotels Crushing It on Social</h3>
+      </div>
+      
+      <div class="gallery">
+        <!-- Placeholder images - in actual implementation, you'd use the images from the original site -->
+        <div class="gallery-item animated delay-1">
+          <img src="https://images.squarespace-cdn.com/content/v1/67e1195e38a23f22db2b14be/1742805358125-49GKHR3QORTTDX835X48/1.png" alt="Hotel social media">
+        </div>
+        <div class="gallery-item animated delay-1">
+          <img src="https://images.squarespace-cdn.com/content/v1/67e1195e38a23f22db2b14be/1742805358134-LBZPUF90STCHJNFZ50ZS/2.png" alt="Hotel social media">
+        </div>
+        <div class="gallery-item animated delay-2">
+          <img src="https://images.squarespace-cdn.com/content/v1/67e1195e38a23f22db2b14be/1742805358106-G0PQR7XHXOGCFDQBD8HL/3.png" alt="Hotel social media">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section cta-section" id="cta">
+    <div class="container">
+      <div class="glass-card animated">
+        <h2>Let's Chat — I'll Even Buy the Coffee</h2>
+        <p class="large">Want to find out if this is right for your hotel? Let's jump on a quick, no-pressure 15-minute call. I'll walk you through how it works, answer any questions — and even if we don't work together...</p>
+        <p class="large"><strong>I'll send you a gift card to your local coffee shop.</strong> Just a small thank-you for your time.</p>
+        <a href="https://calendly.com/contact-muobsocial/30min" class="btn">Book A Call</a>
+      </div>
+    </div>
+    <div class="glow glow-1"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <div class="footer-logo">MUOB</div>
+          <p>Done-for-You Social Media Content for Hotels & BnB's</p>
+          <div class="social-links">
+            <a href="http://www.instagram.com/muobmarketing" class="social-link" target="_blank">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>EXPLORE</h4>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>CONNECT WITH US</h4>
+          <div class="newsletter-form">
+            <p>Drop your email address to receive news and updates. No spam (we like to mind our own business)</p>
+            <input type="email" placeholder="Email Address">
+            <button class="btn">Sign Up</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>MIND UR OWN BUSINESS</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple animation for elements as they enter viewport
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.animated');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+      
+      // Header scroll effect
+      window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 50) {
+          header.style.padding = '0.8rem 0';
+          header.style.background = 'rgba(255, 255, 255, 0.95)';
+          header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+        } else {
+          header.style.padding = '1.2rem 0';
+          header.style.background = 'rgba(255, 255, 255, 0.85)';
+          header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.05)';
+        }
+      });
+      
+      // Navigation active state
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('section');
+      
+      window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').substring(1) === current) {
+            link.classList.add('active');
+          }
+        });
+      });
+      
+      // Smooth scrolling for navigation links
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          
+          window.scrollTo({
+            top: targetSection.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        });
+      });
+      
+      // Tooltip functionality for info buttons
+      const infoButtons = document.querySelectorAll('.info-btn');
+      const tooltip = document.getElementById('tooltip');
+      
+      infoButtons.forEach(btn => {
+        btn.addEventListener('mouseenter', function(e) {
+          const tooltipText = this.getAttribute('data-tooltip');
+          tooltip.textContent = tooltipText;
+          tooltip.style.left = e.pageX + 'px';
+          tooltip.style.top = (e.pageY - 100) + 'px';
+          tooltip.classList.add('visible');
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+          tooltip.classList.remove('visible');
+        });
+      });
+      
+      // Add quirky elements functionality
+      const quirkyElements = document.querySelectorAll('.quirky-element');
+      
+      window.addEventListener('mousemove', (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        
+        quirkyElements.forEach((el, index) => {
+          const offsetX = (x - 0.5) * (10 + index * 5);
+          const offsetY = (y - 0.5) * (10 + index * 5);
+          
+          el.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${offsetX + offsetY}deg)`;
+        });
+      });
+      
+      // Modern particles animation for hero section
+      function createParticles() {
+        const container = document.getElementById('particles-container');
+        if (!container) return;
+        
+        // Create fewer particles (15) for better performance
+        for (let i = 0; i < 15; i++) {
+          createParticle(container);
+        }
+        
+        // Set interval to create particles periodically (less frequently)
+        setInterval(() => {
+          if (Math.random() > 0.8) { // Only create sometimes for better performance
+            createParticle(container);
+          }
+        }, 800);
+      }
+      
+      function createParticle(container) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random properties for diversity
+        const size = Math.random() * 2 + 1; // 1-3px (smaller)
+        const posX = Math.random() * 100; // 0-100% horizontal
+        const posY = 90 + Math.random() * 10; // 90-100% (bottom)
+        const duration = Math.random() * 10 + 15; // 15-25s (slower)
+        const delay = Math.random() * 5; // 0-5s delay
+        
+        // Apply styles to particle
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.bottom = `${posY}%`;
+        particle.style.animation = `particle-animation ${duration}s linear ${delay}s`;
+        
+        // Add to container
+        container.appendChild(particle);
+        
+        // Remove after animation completes
+        setTimeout(() => {
+          if (particle.parentNode === container) {
+            container.removeChild(particle);
+          }
+        }, (duration + delay) * 1000);
+      }
+      
+      // Initialize the particles
+      createParticles();
+    });
+  </script>
+</body>
+</html>
